@@ -1,0 +1,9 @@
+#!/bin/bash
+
+INDUK_DIR="./backup"
+FILE_NAME=$(find $INDUK_DIR -type f -name "*.backup" | sort -r | head -1)
+size=${#FILE_NAME}
+BACKUP_NAME=$(echo $FILE_NAME | cut -c3-$size)
+echo -e "File Backup Find---> $BACKUP_NAME \v"
+# /Applications/pgAdmin\ 4.app/Contents/SharedSupport/pg_restore -h localhost -p 5432 -U checklist -v -w -d checklist $INDUK_DIR/$BACKUP_NAME
+/Users/dedystyawan/pg_dump/pg_restore -h ${POSTGRES_HOST} -p ${POSTGRES_PORT} -U ${POSTGRES_DB} -v -w -d ${POSTGRES_DB} $INDUK_DIR/$BACKUP_NAME

@@ -1,0 +1,16 @@
+#!/bin/bash
+# Get from .env
+source .env
+
+#Create folder Tempat Backup
+YM=$(date +"%Y_%m")
+INDUK_DIR="./backup"
+CURRENT_DIR=basename "$PWD"
+# HOSTNAME=$(scutil --get LocalHostName)
+# echo $HOSTNAME
+#Backup Process
+DATTIM=$(date +"%Y_%m_%d_%H_%M")
+# BACKUP_NAME="checklist_$DATTIM.backup"
+BACKUP_NAME="$POSTGRES_DB"_"$DATTIM.backup"
+# /Applications/pgAdmin\ 4.app/Contents/SharedSupport/pg_dump -h localhost -p 5432 -U checklist -w -F c -b -v -f $INDUK_DIR/$BACKUP_NAME checklist
+/Users/dedystyawan/data/pgsql/bin/pg_dump -h ${POSTGRES_HOST} -p ${POSTGRES_PORT} -U ${POSTGRES_DB} -W -F c -b -v -f $INDUK_DIR/$BACKUP_NAME ${POSTGRES_DB}
