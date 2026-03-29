@@ -24,6 +24,6 @@ jobs:
           host: ${{ vars.VPS_HOST }} # IP server Anda
           username: ${{ vars.VPS_USERNAME }} # Username SSH, misal 'root' atau 'ubuntu'
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }} # Kunci privat yang sudah disimpan
-          port: 22101 # Port SSH Anda
+          port: 224 # Port SSH Anda
           source: "."
           target: "mnt/bdone4-storage/database/fanfirst-db"  # tujuan di VPS
