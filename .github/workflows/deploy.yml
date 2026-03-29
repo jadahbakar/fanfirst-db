@@ -5,6 +5,10 @@ on:
   push:
     branches: [ "main", "master" ] # atau "master", sesuai dengan branch utama Anda
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # Tambahkan ini untuk pakai Node 24
+
+
 jobs:
   deploy:
     runs-on: ubuntu-latest # Menggunakan runner dari GitHub
@@ -21,8 +25,5 @@ jobs:
           username: ${{ vars.VPS_USERNAME }} # Username SSH, misal 'root' atau 'ubuntu'
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }} # Kunci privat yang sudah disimpan
           port: 22101 # Port SSH Anda
-          script: |
-            # Contoh script yang akan dijalankan di VPS
-            cd /mnt/bdone4-storage/database/fanfirst-db
-            git pull origin main # Ambil perubahan terbaru
-            echo "✅ Deployment selesai dari GitHub Actions!"
+          source: "./*"  # semua file dari repo
+          target: "mnt/bdone4-storage/database/fanfirst-db"  # tujuan di VPS
